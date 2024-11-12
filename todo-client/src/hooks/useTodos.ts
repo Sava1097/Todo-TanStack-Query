@@ -32,10 +32,11 @@ export function useTodos() {
 
       return {prevTasks}
     },
-    onError:(_err, _title, context) => {
+    onError:(err, _title, context) => {
       if(context?.prevTasks) {
-        queryClient.setQueryData(['todos'],context.prevTasks)
+        queryClient.setQueryData(['tasks'],context.prevTasks)
       }
+      throw err
     },
     onSettled: () => queryClient.invalidateQueries({queryKey:['tasks']})
   })
@@ -57,10 +58,11 @@ export function useTodos() {
 
       return {prevTasks}
     },
-    onError: (_err, _id, context) => {
+    onError: (err, _id, context) => {
       if (context?.prevTasks) {
         queryClient.setQueryData(['tasks'], context.prevTasks)
       }
+      throw err
     },
     onSettled: () =>  queryClient.invalidateQueries({queryKey:['tasks']})
   })
@@ -79,12 +81,12 @@ export function useTodos() {
       );
       return  { prevTasks }
     },
-    onError:(_err, _id, context ) => {
+    onError:(err, _id, context ) => {
       if (context?.prevTasks) {
         queryClient.setQueryData(['tasks'], context.prevTasks)
       }
+      throw err 
     }
-
   })
 
   return  {taskQuery, addMutationTodo, toggleMutationTodo, removeMutationTodo} 
