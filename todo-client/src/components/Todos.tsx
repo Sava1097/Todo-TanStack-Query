@@ -5,6 +5,7 @@ import { Input } from "./ui/input";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
 import { Checkbox } from "./ui/checkbox";
 import { X } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 
 export function Todos() {
   const { taskQuery, addMutationTodo, toggleMutationTodo, removeMutationTodo } = useTodos();
@@ -38,7 +39,7 @@ export function Todos() {
             onSubmit={handlerAddTodo}
           >
             <Input
-              className="text-base p-2 md:text-lg md:p-3 lg:text-xl lg:p-4 flex-1"
+              className="text-base p-2 md:text-lg md:p-3 lg:text-xl lg:p-4"
               type="text"
               value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
@@ -46,10 +47,10 @@ export function Todos() {
               placeholder="Enter new task"
             />
             <Button
-              className="w-1/2 mx-auto md:mx-0 md:w-1/3 rounded-lg text-base py-2 md:text-lg md:py-3 lg:text-xl lg:py-4 hover:cursor-pointer"
+              className="w-1/2 mx-auto md:mx-0 md:w-1/3 rounded-lg text-base  py-2 md:text-lg md:py-3 lg:text-xl lg:py-4 hover:cursor-pointer"
               type="submit"
             >
-              Add task
+              Add task <CirclePlus/>
             </Button>
           </form>
 
@@ -67,7 +68,7 @@ export function Todos() {
               >
                 <label className="flex gap-3 justify-center items-center lg:gap-6">
                   <Checkbox
-                    className="lg:h-7 lg:w-7"
+                    className="lg:h-7 lg:w-7 cursor-pointer"
                     checked={todo.completed}
                     onCheckedChange={() => toggleMutationTodo.mutate(todo.id)}
                   />
