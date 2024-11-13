@@ -1,12 +1,20 @@
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './index.css';
-import App from './App.tsx';
+import { RouterProvider, Router } from "@tanstack/react-router";
+import { routeTree } from './routeTree.gen.ts';
 
 const todosQuery = new QueryClient();
+const todosRouter = new Router({ routeTree });
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof Router;
+  }
+}
 
 createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={todosQuery}>
-      <App />
+      <RouterProvider router={todosRouter}/>
     </QueryClientProvider>
 )
