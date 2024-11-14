@@ -13,6 +13,7 @@ export function Todos() {
 
   const handlerAddTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // TODO: use https://github.com/Sava1097/Todo-TanStack-Query.git instead
     if (!newTask.trim()) return alert("Task can't be empty");
 
     addMutationTodo.reset()
@@ -22,7 +23,9 @@ export function Todos() {
     });
   };
 
+  // TODO: add a spinning loading icon
   if (taskQuery.isLoading) return <p className="text-green-600 text-2xl text-center">Loading...</p>;
+  // TODO: use https://ui.shadcn.com/docs/components/alert
   if (taskQuery.isError) return <p className="text-red-600 text-2xl text-center">Failed to load todos</p>;
   
   return (
@@ -47,7 +50,7 @@ export function Todos() {
               placeholder="Enter new task"
             />
             <Button
-              className="w-1/2 mx-auto md:mx-0 md:w-1/3 rounded-lg text-base  py-2 md:text-lg md:py-3 lg:text-xl lg:py-4 hover:cursor-pointer"
+              className="w-1/2 mx-auto md:mx-0 md:w-1/3 rounded-lg text-base py-2 md:text-lg md:py-3 lg:text-xl lg:py-4 hover:cursor-pointer"
               type="submit"
             >
               Add task <CirclePlus/>

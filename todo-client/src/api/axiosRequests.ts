@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// TODO: no need to call file as "axiosTasks" cause "axios" is about implementation
+// but file names should be more descriptive about the purpose
 export type Task = {
   id: number;
   title: string;
@@ -7,12 +9,16 @@ export type Task = {
 }
 
 const apiUrl = axios.create({
+  // TODO: get this from the .env file
   baseURL: "http://localhost:4000", // backend
 });
 
 // get all tasks
-export const getAllTasks = async (): Promise<Task[]> => {
-  const { data } = await apiUrl.get("/tasks");
+export const getAllTasks = async () => {
+  // TODO: I'm not sure if that work, but axios' methods should be generic
+  // and it's better to pass the type as a generic parameter
+  // apply same changes to other functions
+  const { data } = await apiUrl.get<Task[]>("/tasks");
   return data;
 };    
 
