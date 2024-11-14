@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient  } from "@tanstack/react-query";
-import { getAllTasks, addTask, toggleTask, deleteTask } from "../api/axiosTasks";
-import type { Task } from "../api/axiosTasks";
+import { getAllTasks, addTask, toggleTask, deleteTask } from "../api/axiosRequests";
+import type { Task } from "../api/axiosRequests";
 
 export function useTodos() {
   const queryClient = useQueryClient();
