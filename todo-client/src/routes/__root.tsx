@@ -1,5 +1,6 @@
 import { Outlet, Link } from "@tanstack/react-router";
 import { createRootRoute } from "@tanstack/react-router";
+import { Toaster  } from "@/components/ui/sonner";
 
 function RootLayout() {
   return (
@@ -10,6 +11,7 @@ function RootLayout() {
       </nav>
       <main className="flex-1 p-4">
         <Outlet />
+        <Toaster/>
       </main>
     </div>
   );

@@ -4,8 +4,11 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
 import { Checkbox } from "./ui/checkbox";
-import { X } from "lucide-react";
+import {  X } from "lucide-react";
 import { CirclePlus } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
+import { toast } from "sonner";
 
 export function Todos() {
   const { taskQuery, addMutationTodo, toggleMutationTodo, removeMutationTodo } = useTodos();
@@ -13,20 +16,35 @@ export function Todos() {
 
   const handlerAddTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: use https://github.com/Sava1097/Todo-TanStack-Query.git instead
-    if (!newTask.trim()) return alert("Task can't be empty");
+    if (!newTask.trim())  {
+      toast.error("task can't be empty")
+      return
+    }
 
     addMutationTodo.reset()
 
     addMutationTodo.mutate(newTask, {
+      onSuccess: () => toast.success("Success!! Task added"),
       onSettled: () => setNewTask(""),
     });
   };
 
   // TODO: add a spinning loading icon
-  if (taskQuery.isLoading) return <p className="text-green-600 text-2xl text-center">Loading...</p>;
+  if (taskQuery.isLoading) 
+    return  (
+      <div className="flex justify-center items-center h-64">
+        <Loader2 className="animate-spin text-green-600 w-12 h-12" />
+      </div>
+    );
+
   // TODO: use https://ui.shadcn.com/docs/components/alert
-  if (taskQuery.isError) return <p className="text-red-600 text-2xl text-center">Failed to load todos</p>;
+  if (taskQuery.isError) 
+    return  (
+      <Alert className="flex flex-col justify-center  items-center" variant="destructive">
+        <AlertTitle>Network error...</AlertTitle>
+        <AlertDescription>Failed to load todos</AlertDescription>
+      </Alert>  
+    )
   
   return (
     <div className="md:min-h-screen bg-gray-50 flex md:items-center lg:items-start justify-center p-4">

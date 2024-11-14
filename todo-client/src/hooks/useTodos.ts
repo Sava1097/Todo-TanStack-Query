@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient  } from "@tanstack/react-query";
-import { getAllTasks, addTask, toggleTask, deleteTask } from "../api/axiosRequests";
+import { getAllTasks, addTask, toggleTask, deleteTask } from "@/api/axiosRequests";
 import type { Task } from "../api/axiosRequests";
 
 export function useTodos() {
@@ -7,7 +7,7 @@ export function useTodos() {
 
   //get all Tasks`
   const taskQuery = useQuery<Task[]>({
-    queryKey: ["tasks"],
+     queryKey: ["tasks"],
     queryFn:getAllTasks  
   })
 
@@ -52,7 +52,7 @@ export function useTodos() {
       queryClient.setQueryData<Task[]>(
         ['tasks'],
         prevTasks.map((todo) => 
-          todo.id === id ? {...todo, completed: !todo.completed} : todo
+          todo.id === id ? {...todo, completed:!todo.completed} : todo
         )
       );
 
@@ -89,7 +89,5 @@ export function useTodos() {
     }
   })
 
-  // TODO: split into each separate hook
-  // otherwise it can become hard to manage and it might cause unnecessary rerenders (we need to discuss it)
   return  {taskQuery, addMutationTodo, toggleMutationTodo, removeMutationTodo} 
 }
