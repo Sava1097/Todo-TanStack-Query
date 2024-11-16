@@ -22,11 +22,8 @@ export function Todos() {
 
   const handlerAddTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!newTask.trim()) {
-      toast.error("Task can't be empty");
-      return;
-    }
-
+    if (!newTask.trim()) return toast.error("Task can't be empty");
+      
     addMutation.reset();
 
     addMutation.mutate(newTask, {
@@ -88,12 +85,6 @@ export function Todos() {
             </div>
           )}
 
-          {addMutation.isError && (
-            <p className="text-red-600 text-center">
-              Failed to add task, try again
-            </p>
-          )}
-
           {removeMutation.isError && (
             <p className="text-red-600 text-center">
               Failed to delete task
@@ -129,7 +120,9 @@ export function Todos() {
                 <Button
                   variant="ghost"
                   className="text-red-500 hover:text-red-700 hover:cursor-pointer hover:scale-110 transition"
-                  onClick={() => removeMutation.mutate(todo.id)}
+                  onClick={() => removeMutation.mutate(todo.id, {
+                    onSuccess: () => toast.success("task deleted")
+                  })}
                 >
                   <X />
                 </Button>

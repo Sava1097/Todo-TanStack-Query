@@ -1,4 +1,5 @@
 import axios from "axios";
+import { config } from "@/config";
 
 export type Task = {
   id: number;
@@ -6,29 +7,29 @@ export type Task = {
   completed: boolean;
 }
 
-const apiUrl = axios.create({
-  baseURL:  import.meta.env.VITE_API_URL, // backend
+const api = axios.create({
+  baseURL:  config.apiUrl, // backend
 });
 
 // get all tasks
 export const getAllTasks = async () => {
-  const { data } = await apiUrl.get<Task[]>("/tasks");
+  const { data } = await api.get<Task[]>("/tasks");
   return data;
 };    
 
 // add task
 export const addTask = async (title: string) => {
-  const {data} = await apiUrl.post<Task>("/tasks", { title });
+  const {data} = await api.post<Task>("/tasks", { title });
   return data;
 };
 
 // edit task
 export const toggleTask = async (id: number) => {
-  const { data } = await apiUrl.patch<Task>(`/tasks/${id}`);
+  const { data } = await api.patch<Task>(`/tasks/${id}`);
   return data;
 };
 
 // delete task 
 export const deleteTask = async (id: number) => {
-  await apiUrl.delete<Task>(`/tasks/${id}`);
+  await api.delete<Task>(`/tasks/${id}`);
 };
