@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addTask } from "@/api/axiosTasks";
+import { addTask } from "@/api/axiosRequests";
 import type { Task } from "@/api/axiosRequests";
 
 export function useAddTask() {
