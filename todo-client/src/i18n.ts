@@ -9,7 +9,7 @@ import ru from "../public/locales/ru/translation.json";
 const resources = {
   en: { translation: en },
   ru: { translation: ru },
-} as const;
+} as  const;
 
 // initialization
 i18next

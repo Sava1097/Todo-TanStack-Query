@@ -7,11 +7,13 @@ import { useRemoveTask } from "@/hooks/useRemoveTask";
 
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "./ui/card";
 import { Checkbox } from "./ui/checkbox";
 import { X, CirclePlus, Loader2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { toast } from "sonner";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 export function Todos() {
   const { t } = useTranslation();
@@ -25,7 +27,7 @@ export function Todos() {
 
   const handlerAddTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!newTask.trim()) return toast.error(t("task can't be empty"));
+    if (!newTask.trim()) return toast.error(t("task_can't_be_empty"));
       
     addMutation.reset();
 
@@ -52,7 +54,7 @@ export function Todos() {
     );
 
   return (
-    <div className="md:min-h-screen bg-gray-50 flex md:items-center lg:items-start justify-center p-4">
+    <div className="md:min-h-1 bg-gray-50 flex md:items-center lg:items-start justify-center p-4">
       <Card className="w-full max-w-lg shadow-lg rounded-2xl">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center text-gray-800">
@@ -73,7 +75,7 @@ export function Todos() {
               placeholder={t('placeholder')}
             />
             <Button
-              className="mx-auto md:mx-0 rounded-lg text-base py-2 md:text-lg md:py-3 hover:cursor-pointer"
+              className="mx-auto md:mx-0 rounded-lg text-base py-2 md:text-lg md:py-3 hover:cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95"
               type="submit"
               disabled={addMutation.isPending}
             >
@@ -95,42 +97,48 @@ export function Todos() {
           )}
 
           <ul className="p-2">
-            {tasks?.map((todo) => (
-              <li
-                key={todo.id}
-                className="flex justify-between items-center rounded-lg lg:text-3xl bg-white p-2 lg:p-4 mb-1.5 shadow-sm hover:shadow-md transition"
-              >
-                <label className="flex gap-3 justify-center items-center lg:gap-6">
-                  <Checkbox
-                    className="h-5 w-5 lg:h-7 lg:w-7 cursor-pointer"
-                    checked={todo.completed}
-                    onCheckedChange={() =>
-                      toggleMutation.mutate(todo.id, {
-                        onError: () => toast.error(t("failed_to_change_state")),
-                      })
-                    }
-                  />
-                  <span
-                    className={
-                      todo.completed
-                        ? "line-through text-gray-400"
-                        : "text-gray-700"
-                    }
-                  >
-                    {todo.title}
-                  </span>
-                </label>
-                <Button
-                  variant="ghost"
-                  className="text-red-500 hover:text-red-700 hover:cursor-pointer hover:scale-110 transition"
-                  onClick={() => removeMutation.mutate(todo.id, {
-                    onSuccess: () => toast.success(t("task_deleted"))
-                  })}
+            <AnimatePresence>
+              {tasks?.map((todo) => (
+                <motion.li
+                  key={todo.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex justify-between items-center rounded-lg lg:text-3xl bg-white p-2 lg:p-4 mb-1.5 shadow-sm hover:shadow-md transition"
                 >
-                  <X />
-                </Button>
-              </li>
-            ))}
+                  <label className="flex gap-3 justify-center items-center lg:gap-6">
+                    <Checkbox
+                      className="h-5 w-5 lg:h-7 lg:w-7 cursor-pointer"
+                      checked={todo.completed}
+                      onCheckedChange={() =>
+                        toggleMutation.mutate(todo.id, {
+                          onError: () => toast.error(t("failed_to_change_state")),
+                        })
+                      }
+                    />
+                    <span
+                      className={
+                        todo.completed
+                          ? "line-through text-gray-400"
+                          : "text-gray-700"
+                      }
+                    >
+                      {todo.title}
+                    </span>
+                  </label>
+                  <Button
+                    variant="ghost"
+                    className="text-red-500 hover:text-red-700 hover:cursor-pointer hover:scale-110 transition"
+                    onClick={() => removeMutation.mutate(todo.id, {
+                      onSuccess: () => toast.success(t("task_deleted"))
+                    })}
+                  >
+                    <X />
+                  </Button>
+                </motion.li>
+              ))}
+            </AnimatePresence>
           </ul>
 
           {(!tasks || tasks.length < 1) && (
@@ -138,7 +146,14 @@ export function Todos() {
           )}
 
         </CardContent>
-      </Card>
+        <CardFooter className="flex justify-center items-center text-gray-600 md:text-xl py-1">
+          {tasks && tasks.length > 0 && (
+            <p>
+              {t("tasks_left", { count: tasks.filter((task) => !task.completed).length })}! 
+            </p>
+          )}
+        </CardFooter>
+      </Card> 
     </div>
   );
 }
