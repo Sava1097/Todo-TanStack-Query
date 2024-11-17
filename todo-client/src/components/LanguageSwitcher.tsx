@@ -1,0 +1,48 @@
+import { useTranslation } from "react-i18next";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem,DropdownMenuTrigger,} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Globe } from "lucide-react";
+
+const languages = [
+  { code: "en", label: "English", flag: "EN" },
+  { code: "ru", label: "Русский", flag: "RU" },
+];
+
+export function LanguageSwitcher() {
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language || "en";
+
+  const handleChange = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
+  return (
+    <DropdownMenu >
+      <DropdownMenuTrigger className="absolute top-1 right-2 md:top-2 md:right-3" asChild>
+        <Button 
+          variant="outline"
+          size="sm"
+          className="flex items-center gap-2 hover:cursor-pointer"
+        >
+          <Globe className="w-3 h-3" />
+          {languages.find((lng) => lng.code === currentLang)?.flag}
+        </Button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent className="mr-1"  align="start">
+        {languages.map((lng) => (
+          <DropdownMenuItem
+            key={lng.code}
+            onClick={() => handleChange(lng.code)}
+            className={`flex items-center justify-between hover:cursor-pointer ${
+              currentLang === lng.code ? "font-semibold bg-muted" : ""
+            }`}
+          >
+            <span>{lng.flag}</span>
+            <span>{lng.label}</span>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}

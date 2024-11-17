@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useState, type FormEvent } from "react";
 import { useAllTasks } from "@/hooks/useGetAllTasks";
 import { useAddTask } from "@/hooks/useAddTask";
@@ -13,6 +14,8 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { toast } from "sonner";
 
 export function Todos() {
+  const { t } = useTranslation();
+
   const { data: tasks, isLoading, isError } = useAllTasks();
   const addMutation = useAddTask();
   const toggleMutation = useToggleTask();
@@ -22,13 +25,13 @@ export function Todos() {
 
   const handlerAddTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!newTask.trim()) return toast.error("Task can't be empty");
+    if (!newTask.trim()) return toast.error(t("task can't be empty"));
       
     addMutation.reset();
 
     addMutation.mutate(newTask, {
-      onSuccess: () => toast.success("✅ Success! Task added"),
-      onError: () => toast.error("Ooopss, something went wrong"),
+      onSuccess: () => toast.success(t("success!")),
+      onError: () => toast.error(t("ooopss")),
       onSettled: () => setNewTask(""),
     });
   };
@@ -42,9 +45,9 @@ export function Todos() {
 
   if (isError)
     return (
-      <Alert className="flex flex-col justify-center items-center" variant="destructive">
-        <AlertTitle>Network error...</AlertTitle>
-        <AlertDescription>Failed to load todos</AlertDescription>
+      <Alert className="flex flex-col justify-center h-screen items-center text-2xl" variant="destructive">
+        <AlertTitle>{t("network_error")}...</AlertTitle>
+        <AlertDescription>{t("failed_to_load")}</AlertDescription>
       </Alert>
     );
 
@@ -53,12 +56,12 @@ export function Todos() {
       <Card className="w-full max-w-lg shadow-lg rounded-2xl">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center text-gray-800">
-            Todo List
+            {t("title")} 
           </CardTitle>
         </CardHeader>
         <CardContent>
           <form
-            className="flex flex-col gap-2 p-2 md:flex-row md:justify-between mb-2"
+            className="flex flex-col items-center gap-2.5 p-2 md:flex-row md:justify-between mb-2"
             onSubmit={handlerAddTodo}
           >
             <Input
@@ -67,27 +70,27 @@ export function Todos() {
               value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
               required
-              placeholder="Enter new task"
+              placeholder={t('placeholder')}
             />
             <Button
-              className="w-1/2 mx-auto md:mx-0 md:w-1/3 rounded-lg text-base py-2 md:text-lg md:py-3 lg:text-xl lg:py-4 hover:cursor-pointer"
+              className="mx-auto md:mx-0 rounded-lg text-base py-2 md:text-lg md:py-3 hover:cursor-pointer"
               type="submit"
               disabled={addMutation.isPending}
             >
-              Add task <CirclePlus />
+              {t("add_task")} <CirclePlus />
             </Button>
           </form>
 
           {addMutation.isPending && (
             <div className="flex flex-col justify-center items-center gap-2">
-              <p className="text-green-500">Adding todo...</p>
+              <p className="text-green-500">{t('adding_to_do')}...</p>
               <Loader2 className="animate-spin text-green-600 w-4 h-4" />
             </div>
           )}
 
           {removeMutation.isError && (
             <p className="text-red-600 text-center">
-              Failed to delete task
+              {t("failed_to_delete")}
             </p>
           )}
 
@@ -103,7 +106,7 @@ export function Todos() {
                     checked={todo.completed}
                     onCheckedChange={() =>
                       toggleMutation.mutate(todo.id, {
-                        onError: () => toast.error("Failed to change state"),
+                        onError: () => toast.error(t("failed_to_change_state")),
                       })
                     }
                   />
@@ -121,7 +124,7 @@ export function Todos() {
                   variant="ghost"
                   className="text-red-500 hover:text-red-700 hover:cursor-pointer hover:scale-110 transition"
                   onClick={() => removeMutation.mutate(todo.id, {
-                    onSuccess: () => toast.success("task deleted")
+                    onSuccess: () => toast.success(t("task_deleted"))
                   })}
                 >
                   <X />
@@ -131,7 +134,7 @@ export function Todos() {
           </ul>
 
           {(!tasks || tasks.length < 1) && (
-            <div className="text-xl lg:text-3xl text-center">Still didn't have any tasks</div>
+            <div className="text-xl lg:text-3xl text-center">{t("empty")}</div>
           )}
 
         </CardContent>

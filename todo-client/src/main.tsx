@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './index.css';
 import { RouterProvider, Router } from "@tanstack/react-router";
 import { routeTree } from './routeTree.gen.ts';
+import "./i18n"
 
 const todosQuery = new QueryClient();
 const todosRouter = new Router({ routeTree });
