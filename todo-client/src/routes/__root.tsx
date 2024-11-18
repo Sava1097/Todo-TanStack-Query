@@ -4,9 +4,10 @@ import { Toaster  } from "@/components/ui/sonner";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import "../i18n"
+import { t } from "i18next";
 
 function RootLayout() {
-  const { t } = useTranslation()
+  const { t } = useTranslation("__root")
   return (
     <div className="min-h-screen flex flex-col relative">
       <nav className="flex justify-center items-center gap-6 p-4 md:text-2xl bg-gray-100 shadow">
@@ -25,7 +26,7 @@ function RootLayout() {
 function NotFound() {
   return (
     <div className="text-center text-red-600 text-lg">
-      <p>Oops! Page not found 🚧</p>
+      <p>{t("not_found")} 🚧</p>
     </div>
   );
 }

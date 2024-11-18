@@ -12,9 +12,6 @@
   "ooopss": "Ooopss, something went wrong",
   "failed_to_change_state": "Failed to change state",
   "task_deleted": "Success! Task deleted!",
-  "todos": "Todos",
-  "about": "About",
   "tasks_left_one": "{{count}} task left",
-  "tasks_left_other": "{{count}} tasks left",
-  "about_des":"This is a simple Todo List project built with React, TanStack Query,TanStack Router, Tailwind, and ShadCN UI."
+  "tasks_left_other": "{{count}} tasks left"
 }

@@ -12,10 +12,7 @@
   "ooopss": "Упс, что-то пошло не так",
   "failed_to_change_state": "Ошибка смены состояния",
   "task_deleted": "Успех, задача удалена!",
-  "todos": "Список",
-  "about": "О приложении",
   "tasks_left_one": "{{count}} невыполненная задача",
   "tasks_left_few": "{{count}} невыполненные задачи",
-  "tasks_left_many": "{{count}} невыполненных задач",
-  "about_des": "Это простой проект списка задач, созданный с помощью React, TanStack Query, TanStack Router, Tailwind и ShadCN UI."
+  "tasks_left_many": "{{count}} невыполненных задач"
 }
