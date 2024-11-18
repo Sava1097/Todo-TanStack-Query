@@ -101,10 +101,10 @@ export function Todos() {
               {tasks?.map((todo) => (
                 <motion.li
                   key={todo.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.2 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.5 }}
                   className="flex justify-between items-center rounded-lg lg:text-3xl bg-white p-2 lg:p-4 mb-1.5 shadow-sm hover:shadow-md transition"
                 >
                   <label className="flex gap-3 justify-center items-center lg:gap-6">
