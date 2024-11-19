@@ -48,7 +48,7 @@ export function Todos() {
     return (
       <Alert className="flex flex-col justify-center h-screen items-center text-2xl" variant="destructive">
         <AlertTitle>{t("network_error")}...</AlertTitle>
-        <AlertDescription>{t("failed_to_load")}</AlertDescription>
+        <AlertDescription>{t("failed_to_load_todos")}</AlertDescription>
       </Alert>
     );
 
@@ -57,7 +57,7 @@ export function Todos() {
       <Card className="w-full max-w-lg shadow-lg rounded-2xl">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center text-gray-800">
-            {t("title")} 
+            {t("todo_list")} 
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -71,7 +71,7 @@ export function Todos() {
               value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
               required
-              placeholder={t('placeholder')}
+              placeholder={t('enter_new_task')}
             />
             <Button
               className="mx-auto md:mx-0 rounded-lg text-base py-2 md:text-lg md:py-3 hover:cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95"
@@ -84,14 +84,14 @@ export function Todos() {
 
           {addMutation.isPending && (
             <div className="flex flex-col justify-center items-center gap-2">
-              <p className="text-green-500">{t('adding_to_do')}...</p>
+              <p className="text-green-500">{t('adding_todo')}...</p>
               <Loader2 className="animate-spin text-green-600 w-4 h-4" />
             </div>
           )}
 
           {removeMutation.isError && (
             <p className="text-red-600 text-center">
-              {t("failed_to_delete")}
+              {t("failed_to_delete_task")}
             </p>
           )}
 
