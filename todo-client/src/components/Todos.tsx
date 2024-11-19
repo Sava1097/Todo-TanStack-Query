@@ -140,8 +140,8 @@ export function Todos() {
             </AnimatePresence>
           </ul>
 
-          {(!tasks || tasks.length < 1) && (
-            <div className="text-xl lg:text-3xl text-center">{t("empty")}</div>
+          {!tasks?.length && (
+             <div className="text-xl lg:text-3xl text-center">{t("empty")}</div>
           )}
 
         </CardContent>
