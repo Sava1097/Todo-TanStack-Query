@@ -18,7 +18,7 @@ export function Toaster() {
         } as React.CSSProperties
       }
       richColors
-      position="top-right"
+      position="bottom-right"
     />
   )
 }

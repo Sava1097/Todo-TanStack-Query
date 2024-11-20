@@ -3,7 +3,7 @@
   "add_task": "Add task",
   "enter_new_task": "Enter new task",
   "empty": "You don't have any tasks yet",
-  "network_error": "Network error...",
+  "network_error": "Network error",
   "failed_to_load_todos": "Failed to load todos",
   "adding_todo": "Adding todo",
   "failed_to_delete_task": "Failed to delete task",

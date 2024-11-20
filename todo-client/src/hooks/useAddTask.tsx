@@ -11,7 +11,7 @@ export function useAddTask() {
       await queryCLient.cancelQueries({queryKey:(["tasks"])})
       
       const prevTasks = queryCLient.getQueryData<Task[]>(["tasks"]) || [];
-
+ 
       const optimisticTodo: Task = {
         id: Date.now(),
         title,
