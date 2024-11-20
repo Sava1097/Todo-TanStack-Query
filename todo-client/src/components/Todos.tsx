@@ -26,12 +26,12 @@ export function Todos() {
 
   const handlerAddTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!newTask.trim()) return toast.error(t("task_can't_be_empty"));
+    if (!newTask.trim()) return toast.error(t("task_cant_be_empty"));
       
     addMutation.reset();
 
     addMutation.mutate(newTask, {
-      onSuccess: () => toast.success(t("success!")),
+      onSuccess: () => toast.success(t("success")),
       onError: () => toast.error(t("ooopss")),
       onSettled: () => setNewTask(""),
     });
@@ -146,7 +146,7 @@ export function Todos() {
 
         </CardContent>
         <CardFooter className="flex justify-center items-center text-gray-600 md:text-xl py-1">
-          {tasks && tasks.length > 0 && (
+          {!!tasks?.length && (
             <p>
               {t("tasks_left", { count: tasks.filter((task) => !task.completed).length })}! 
             </p>
