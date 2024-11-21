@@ -11,7 +11,7 @@ function RootLayout() {
   const { t } = useTranslation("__root")
   return (
     <div className="min-h-screen flex flex-col relative">
-      <nav className="flex justify-center items-center gap-6 p-4 md:text-2xl bg-gray-200 dark:bg-background text-foreground">
+      <nav className="flex justify-center items-center gap-6 p-4 lg:p-6 md:text-2xl lg:text-3xl bg-gray-200 dark:bg-background text-foreground">
         <ThemeToggle/>
         <Link to="/" className="[&.active]:font-bold">{t("todos")}</Link>
         <Link to="/about" className="[&.active]:font-bold">{t("about")}</Link>

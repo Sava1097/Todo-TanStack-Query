@@ -54,7 +54,7 @@ export const Todos = () => {
 
   return (
     <div className="md:min-h-1 bg-background flex md:items-center lg:items-start justify-center p-4">
-      <Card className="w-full max-w-lg rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.25)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.6)] transition-shadow">
+      <Card className="w-full max-w-lg lg:min-w-2/5 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.25)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.6)] transition-shadow">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center text-gray-800 dark:text-foreground">
             {t("todo_list")} 
@@ -98,9 +98,10 @@ export const Todos = () => {
               {tasks?.map((todo) => (
                 <motion.li
                   key={todo.id}
+                  layout="position"
                   initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
+                  exit={{ opacity: 0, x: -70 }}
                   transition={{ duration: 0.5 }}
                   className="flex justify-between items-center rounded-lg lg:text-3xl bg-background p-2 lg:p-4 mb-1.5 shadow-sm hover:shadow-md transition"
                 >
@@ -115,11 +116,10 @@ export const Todos = () => {
                       }
                     />
                     <span
-                      className={
-                        todo.completed
-                          ? "line-through text-gray-400"
-                          : "text-foreground"
-                      }
+                      className={`
+                        hover:cursor-pointer
+                        ${todo.completed ? "line-through text-gray-400" : "text-foreground"}
+                      `}
                     >
                       {todo.title}
                     </span>

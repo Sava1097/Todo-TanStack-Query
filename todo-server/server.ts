@@ -17,7 +17,7 @@ app.use(express.json());
 
 
 app.get("/", (_req: any, res: any) => {
-  res.send("✅ Todo API работает! Используй /tasks");
+  res.send("✅ Todo API working! Use /tasks");
 });
 
 // in-memory tasks
