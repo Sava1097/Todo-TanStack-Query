@@ -1,4 +1,4 @@
 {
-  "this_app" : "О нашем приложении",
+  "this_app": "О нашем приложении",
   "description": "Это простой проект списка задач, созданный с помощью React, TanStack Query, TanStack Router, Tailwind и ShadCN UI."
 }

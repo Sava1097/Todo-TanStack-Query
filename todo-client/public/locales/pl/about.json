@@ -1,4 +1,4 @@
-{ 
-  "this_app" : "O tej aplikacji", 
-  "description":"Jest to prosty projekt listy rzeczy do zrobienia, zbudowany przy użyciu React, TanStack Query, TanStack Router, Tailwind i ShadCN UI."
+{
+  "this_app": "O tej aplikacji",
+  "description": "Jest to prosty projekt listy rzeczy do zrobienia, zbudowany przy użyciu React, TanStack Query, TanStack Router, Tailwind i ShadCN UI."
 }

@@ -1,4 +1,4 @@
-{ 
-  "this_app" : "About this app", 
-  "description":"This is a simple Todo List project built with React, TanStack Query,TanStack Router, Tailwind, and ShadCN UI."
+{
+  "this_app": "About this app",
+  "description": "This is a simple Todo List project built with React, TanStack Query,TanStack Router, Tailwind, and ShadCN UI."
 }

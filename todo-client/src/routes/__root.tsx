@@ -1,26 +1,30 @@
-import { Outlet, Link } from "@tanstack/react-router";
-import { createRootRoute } from "@tanstack/react-router";
-import { Toaster  } from "@/components/ui/sonner";
-import { useTranslation } from "react-i18next";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import "../i18n"
-import { t } from "i18next";
+import { Outlet, Link } from '@tanstack/react-router';
+import { createRootRoute } from '@tanstack/react-router';
+import { Toaster } from '@/components/ui/sonner';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import '../i18n';
+import { t } from 'i18next';
 
 function RootLayout() {
-  const { t } = useTranslation("__root")
+  const { t } = useTranslation('__root');
   return (
     <div className="min-h-screen flex flex-col relative">
       <nav className="flex justify-center items-center gap-6 p-4 lg:p-6 md:text-2xl lg:text-3xl bg-gray-200 dark:bg-background text-foreground">
-        <ThemeToggle/>
-        <Link to="/" className="[&.active]:font-bold">{t("todos")}</Link>
-        <Link to="/about" className="[&.active]:font-bold">{t("about")}</Link>
-        <LanguageSwitcher/>
+        <ThemeToggle />
+        <Link to="/" className="[&.active]:font-bold">
+          {t('todos')}
+        </Link>
+        <Link to="/about" className="[&.active]:font-bold">
+          {t('about')}
+        </Link>
+        <LanguageSwitcher />
       </nav>
-      <hr/>
+      <hr />
       <main className="flex-1 p-4 bg-background">
         <Outlet />
-        <Toaster/>
+        <Toaster />
       </main>
     </div>
   );
@@ -29,7 +33,7 @@ function RootLayout() {
 function NotFound() {
   return (
     <div className="text-center text-red-600 text-lg">
-      <p>{t("not_found")} 🚧</p>
+      <p>{t('not_found')} 🚧</p>
     </div>
   );
 }
