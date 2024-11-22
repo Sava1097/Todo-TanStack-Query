@@ -5,36 +5,22 @@ import { useToggleTask } from '@/hooks/useToggleTask';
 import { useRemoveTask } from '@/hooks/useRemoveTask';
 
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './ui/card';
-import { Loader2 } from 'lucide-react';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { TodosForm } from './TodosForm';
 import { TodoLIst } from './TodosList';
+import { TodosLoading } from './TodosLoading';
+import { LoadingError } from './LoadingError';
 
 export const Todos = () => {
   const { t } = useTranslation('todos');
 
-  const { data: tasks, isLoading, isError } = useGetAllTasks();
+  const { data: tasks, isLoading, isLoadingError } = useGetAllTasks();
   const addMutation = useAddTask();
   const toggleMutation = useToggleTask();
   const removeMutation = useRemoveTask();
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-64">
-        <Loader2 className="animate-spin text-green-600 w-12 h-12" />
-      </div>
-    );
+  if (isLoading) return <TodosLoading/>
 
-  if (isError)
-    return (
-      <Alert
-        className="flex flex-col justify-center h-screen items-center text-2xl"
-        variant="destructive"
-      >
-        <AlertTitle>{t('network_error')}</AlertTitle>
-        <AlertDescription>{t('failed_to_load_todos')}...</AlertDescription>
-      </Alert>
-    );
+  if (isLoadingError) return <LoadingError/>
 
   return (
     <div className="md:min-h-1 bg-background flex md:items-center lg:items-start justify-center p-4">
