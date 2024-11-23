@@ -1,5 +1,5 @@
-import { Checkbox } from '@radix-ui/react-checkbox';
-import { motion } from 'motion/react';
+import { Checkbox } from '@/components/ui/checkbox';
+import { easeInOut, motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { X } from 'lucide-react';
 import { toast } from 'sonner';
@@ -18,13 +18,12 @@ export const TodosItem = ({ todo, toggleMutation, removeMutation }: TodosItemPro
 
   return (
     <motion.li
-      key={todo.id}
-      layout="position"
+      layout
       initial={{ opacity: 0, x: -15 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -70 }}
-      transition={{ duration: 0.5 }}
-      className="flex justify-between items-center rounded-lg lg:text-3xl bg-background p-2 lg:p-4 mb-1.5 shadow-sm hover:shadow-md transition"
+      transition={{ duration: 0.45, ease: easeInOut }}
+      className="flex justify-between items-center rounded-lg lg:text-3xl bg-background p-2 lg:p-4 shadow-sm hover:shadow-md transition"
     >
       <label className="flex gap-3 justify-center items-center lg:gap-6">
         <Checkbox

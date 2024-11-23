@@ -12,7 +12,7 @@ type TodosListProps = {
 export const TodoLIst = ({ tasks, removeMutation, toggleMutation }: TodosListProps) => {
   return (
     <>
-      <ul className="">
+      <ul className="flex flex-col gap-1">
         <AnimatePresence>
           {tasks?.map((todo) => (
             <TodosItem

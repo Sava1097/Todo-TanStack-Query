@@ -13,16 +13,24 @@ export function useAddTask() {
       const prevTasks = queryCLient.getQueryData<Task[]>(['tasks']) || [];
 
       const optimisticTodo: Task = {
-        id: Date.now(),
+        id: -Date.now(),
         title,
         completed: false,
       };
 
       queryCLient.setQueryData<Task[]>(['tasks'], [...prevTasks, optimisticTodo]);
 
-      return { prevTasks };
+      return { prevTasks, optimisticId: optimisticTodo.id };
     },
 
+    onSuccess(serverTask, _title, context) {
+      queryCLient.setQueryData<Task[]>(['tasks'], (tasks) => 
+        tasks?.map((task) => 
+          task.id === context?.optimisticId ? serverTask : task 
+        )
+      )
+    },
+    
     onError: (err, _title, context) => {
       if (context?.prevTasks) {
         queryCLient.setQueryData(['tasks'], context.prevTasks);
@@ -30,6 +38,6 @@ export function useAddTask() {
       throw err;
     },
 
-    onSettled: () => queryCLient.invalidateQueries({ queryKey: ['tasks'] }),
+    //onSettled: () => queryCLient.invalidateQueries({ queryKey: ['tasks'] }),
   });
 }

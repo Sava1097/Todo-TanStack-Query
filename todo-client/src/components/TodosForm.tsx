@@ -35,7 +35,21 @@ export const TodosForm = ({ addMutation }: TodosFormProps) => {
         onSubmit={handlerAddTodo}
       >
         <Input
-          className="text-base p-2 md:text-lg md:p-3 lg:text-xl lg:p-4"
+          className="
+            text-base 
+            p-2
+            md:text-lg
+            md:p-3
+            lg:text-xl
+            lg:p-6 
+            rounded-xl
+            shadow-sm
+            focus-visible:shadow-lg
+            focus-visible:ring-2
+            focus-visible:ring-primary/40
+            focus-visible:scale-[1.01]
+            transition-all
+            duration-200"
           type="text"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
