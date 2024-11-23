@@ -29,7 +29,7 @@ export const TodosForm = ({ addMutation }: TodosFormProps) => {
   };
 
   return (
-    <>
+    <div className='relative'>
       <form
         className="flex flex-col items-center gap-2.5 p-2 md:flex-row md:justify-between mb-2"
         onSubmit={handlerAddTodo}
@@ -66,11 +66,17 @@ export const TodosForm = ({ addMutation }: TodosFormProps) => {
       </form>
 
       {addMutation.isPending && (
-        <div className="flex flex-col justify-center items-center gap-2">
-          <p className="text-green-500">{t('adding_todo')}...</p>
-          <Loader2 className="animate-spin text-green-600 w-4 h-4" />
+        <div className="
+          absolute inset-0 
+          flex flex-col items-center justify-center gap-1
+          bg-background/70
+          backdrop-blur-sm
+          rounded-xl
+        ">
+          <p className="text-primary">{t('adding_todo')}...</p>
+          <Loader2 className="animate-spin w-5 h-5 text-primary"/>
         </div>
       )}
-    </>
+    </div>
   );
 };

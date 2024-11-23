@@ -3,8 +3,10 @@ import { config } from '@/config';
 
 export type Task = {
   id: number;
+  clientId: string;
   title: string;
   completed: boolean;
+  status: 'pending' | 'synced' | 'error'
 };
 
 const api = axios.create({
@@ -12,10 +14,16 @@ const api = axios.create({
 });
 
 // get all tasks
-export const getAllTasks = async () => {
-  const { data } = await api.get<Task[]>('/tasks');
-  return data;
+export const getAllTasks = async (): Promise<Task[]> => {
+  const { data } = await api.get<Omit<Task, 'clientId' | 'status'>[]>('/tasks');
+
+  return data.map(task => ({
+    ...task,
+    clientId: String(task.id),
+    status: 'synced',
+  }));
 };
+
 
 // add task
 export const addTask = async (title: string) => {

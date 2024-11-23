@@ -18,8 +18,8 @@ export const TodosItem = ({ todo, toggleMutation, removeMutation }: TodosItemPro
 
   return (
     <motion.li
-      layout
-      initial={{ opacity: 0, x: -15 }}
+      layout='position'
+      initial={{ opacity: 0, x: -30 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -70 }}
       transition={{ duration: 0.45, ease: easeInOut }}
@@ -34,6 +34,7 @@ export const TodosItem = ({ todo, toggleMutation, removeMutation }: TodosItemPro
               onError: () => toast.error(t('failed_to_change_state')),
             })
           }
+          disabled={todo.status !== 'synced'}
         />
         <span
           className={`
@@ -54,6 +55,7 @@ export const TodosItem = ({ todo, toggleMutation, removeMutation }: TodosItemPro
             onError: () => toast.error(t('failed_to_delete_task')),
           })
         }
+        disabled={todo.status !== 'synced'}
       >
         <X />
       </Button>

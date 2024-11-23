@@ -12,11 +12,11 @@ type TodosListProps = {
 export const TodoLIst = ({ tasks, removeMutation, toggleMutation }: TodosListProps) => {
   return (
     <>
-      <ul className="flex flex-col gap-1">
-        <AnimatePresence>
+      <ul className="flex flex-col gap-2 lg:gap-3">
+        <AnimatePresence initial={false}>
           {tasks?.map((todo) => (
             <TodosItem
-              key={todo.id}
+              key={todo.clientId}
               todo={todo}
               removeMutation={removeMutation}
               toggleMutation={toggleMutation}

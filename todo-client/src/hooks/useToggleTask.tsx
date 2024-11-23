@@ -25,6 +25,5 @@ export function useToggleTask() {
       }
       throw err;
     },
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['tasks'] }),
   });
 }
