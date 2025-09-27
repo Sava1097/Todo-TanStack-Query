@@ -33,7 +33,7 @@ app.get("/tasks", (req: any, res: any) => {
 app.post("/tasks", (req: any, res: any) => {
   const { title } = req.body;
   if (!title) {
-    return res.status(400).json({ error: "Title is required" });
+    return res.status(500).json({ error: "Title is required" });
   }
 
   const newTask: Task = {
