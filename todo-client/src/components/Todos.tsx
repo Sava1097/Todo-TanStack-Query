@@ -25,17 +25,20 @@ export function Todos() {
   if (taskQuery.isError) return <p className="text-red-600 text-2xl text-center">Failed to load todos</p>;
   
   return (
-    <Card className="w-full max-w-lg shadow-lg rounded-2xl">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center text-gray-800">
-          Todo List
-        </CardTitle>
+    <div className="md:min-h-screen bg-gray-50 flex md:items-center lg:items-start justify-center p-4">
+      <Card className="w-full max-w-lg shadow-lg rounded-2xl">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-center text-gray-800">
+            Todo List
+          </CardTitle>
+        <CardHeader/>
         <CardContent>
           <form
-            className="flex flex-col gap-2 p-1 md:flex-row md:justify-between mb-2"
+            className="flex flex-col gap-2 p-2 md:flex-row md:justify-between mb-2"
             onSubmit={handlerAddTodo}
           >
             <Input
+              className="text-base p-2 md:text-lg md:p-3 lg:text-xl lg:p-4 flex-1"
               type="text"
               value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
@@ -43,14 +46,14 @@ export function Todos() {
               placeholder="Enter new task"
             />
             <Button
-              className="w-1/2 mx-auto md:mx-0 md:w-1/3 rounded-lg"
+              className="w-1/2 mx-auto md:mx-0 md:w-1/3 rounded-lg text-base py-2 md:text-lg md:py-3 lg:text-xl lg:py-4 hover:cursor-pointer"
               type="submit"
             >
               Add task
             </Button>
           </form>
 
-          {addMutationTodo.isPending ? <p className="text-green-600">adding todo...</p> : ""}
+          {addMutationTodo.isPending? <p className="text-green-600">adding todo...</p> : ""}
           {addMutationTodo.isError? <p className="text-red-600">Failed to add task, try again</p> : ""}
 
           {toggleMutationTodo.isError && <p className="text-red-600">Toggle error</p> }
@@ -60,11 +63,11 @@ export function Todos() {
             {taskQuery.data?.map((todo) => (
               <li
                 key={todo.id}
-                className="flex justify-between items-center rounded-lg bg-white p-2 mb-1.5 shadow-sm hover:shadow-md transition"
+                className="flex justify-between items-center rounded-lg lg:text-3xl bg-white p-2 lg:p-4 mb-1.5 shadow-sm hover:shadow-md transition"
               >
-                <label className="flex gap-3 items-center">
+                <label className="flex gap-3 justify-center items-center lg:gap-6">
                   <Checkbox
-                    className="w-5 h-5"
+                    className="lg:h-7 lg:w-7"
                     checked={todo.completed}
                     onCheckedChange={() => toggleMutationTodo.mutate(todo.id)}
                   />
@@ -72,7 +75,7 @@ export function Todos() {
                     className={
                       todo.completed
                         ? "line-through text-gray-400"
-                        : "text-gray-700"
+                        : "text-gray-700" 
                     }
                   >
                     {todo.title}
@@ -91,5 +94,6 @@ export function Todos() {
         </CardContent>
       </CardHeader>
     </Card>
+    </div>
   );
 }
