@@ -89,5 +89,7 @@ export function useTodos() {
     }
   })
 
+  // TODO: split into each separate hook
+  // otherwise it can become hard to manage and it might cause unnecessary rerenders (we need to discuss it)
   return  {taskQuery, addMutationTodo, toggleMutationTodo, removeMutationTodo} 
 }

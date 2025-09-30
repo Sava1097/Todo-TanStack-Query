@@ -1,5 +1,6 @@
 import { Link, Outlet } from "@tanstack/react-router"
 
+// TODO: this isn't used anywhere
 export default function Root() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
