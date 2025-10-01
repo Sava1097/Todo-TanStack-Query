@@ -14,7 +14,7 @@ const apiUrl = axios.create({
 export const getAllTasks = async (): Promise<Task[]> => {
   const { data } = await apiUrl.get("/tasks");
   return data;
-};
+};    
 
 // add task
 export const addTask = async (title: string): Promise<Task> => {

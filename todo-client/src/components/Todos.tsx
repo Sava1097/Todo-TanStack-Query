@@ -54,11 +54,11 @@ export function Todos() {
             </Button>
           </form>
 
-          {addMutationTodo.isPending? <p className="text-green-600">adding todo...</p> : ""}
-          {addMutationTodo.isError? <p className="text-red-600">Failed to add task, try again</p> : ""}
+          {addMutationTodo.isPending? <p className="text-green-600 text-center">adding todo...</p> : ""}
+          {addMutationTodo.isError? <p className="text-red-600 text-center">Failed to add task, try again</p> : ""}
 
-          {toggleMutationTodo.isError && <p className="text-red-600">Toggle error</p> }
-          {removeMutationTodo.isError && <p className="text-red-600">Failed to delete task</p>}
+          {toggleMutationTodo.isError && <p className="text-red-600 text-center">Toggle error</p> }
+          {removeMutationTodo.isError && <p className="text-red-600 text-center">Failed to delete task</p>}
 
           <ul className="p-2">
             {taskQuery.data?.map((todo) => (
@@ -68,15 +68,15 @@ export function Todos() {
               >
                 <label className="flex gap-3 justify-center items-center lg:gap-6">
                   <Checkbox
-                    className="lg:h-7 lg:w-7 cursor-pointer"
+                    className="h-5 w-5 lg:h-7 lg:w-7 cursor-pointer"
                     checked={todo.completed}
                     onCheckedChange={() => toggleMutationTodo.mutate(todo.id)}
                   />
                   <span
                     className={
                       todo.completed
-                        ? "line-through text-gray-400"
-                        : "text-gray-700" 
+                        ? "line-through text-gray-400 text-xl"
+                        : "text-gray-700 text-xl" 
                     }
                   >
                     {todo.title}
