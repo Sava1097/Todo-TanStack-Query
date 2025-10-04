@@ -129,6 +129,11 @@ export function Todos() {
               </li>
             ))}
           </ul>
+
+          {(!tasks || tasks.length < 1) && (
+            <div className="text-xl lg:text-3xl text-center">Still didn't have any tasks</div>
+          )}
+
         </CardContent>
       </Card>
     </div>
