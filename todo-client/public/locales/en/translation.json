@@ -7,11 +7,13 @@
   "failed_to_load": "Failed to load todos",
   "adding_to_do": "Adding todo",
   "failed_to_delete": "Failed to delete task",
-  "task can't be empty": "Task can't be empty",
+  "task_can't_be_empty": "Task can't be empty",
   "success!": "Success! Task added",
   "ooopss": "Ooopss, something went wrong",
   "failed_to_change_state": "Failed to change state",
   "task_deleted": "Success! Task deleted!",
   "todos": "Todos",
-  "about": "About"
+  "about": "About",
+  "tasks_left_one": "{{count}} task left",
+  "tasks_left_other": "{{count}} tasks left"
 }
