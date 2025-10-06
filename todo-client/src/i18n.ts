@@ -18,9 +18,6 @@ i18next
     resources,
     lng: "en",
     fallbackLng: "en",
-    interpolation: {
-      escapeValue: false,
-    },
   });
 
 export type DefaultResources = typeof resources;

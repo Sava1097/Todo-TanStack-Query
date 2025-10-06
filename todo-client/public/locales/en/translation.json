@@ -15,5 +15,6 @@
   "todos": "Todos",
   "about": "About",
   "tasks_left_one": "{{count}} task left",
-  "tasks_left_other": "{{count}} tasks left"
+  "tasks_left_other": "{{count}} tasks left",
+  "about_des":"This is a simple Todo List project built with React, TanStack Query,TanStack Router, Tailwind, and ShadCN UI."
 }
