@@ -1,4 +1,4 @@
 {
-  "about_us" : "О нашем приложении",
-  "about_des": "Это простой проект списка задач, созданный с помощью React, TanStack Query, TanStack Router, Tailwind и ShadCN UI."
+  "us" : "О нашем приложении",
+  "des": "Это простой проект списка задач, созданный с помощью React, TanStack Query, TanStack Router, Tailwind и ShadCN UI."
 }
