@@ -1,30 +1,27 @@
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
+import HTTPBackend from "i18next-http-backend"
 
-// import translation 
-import en from "../public/locales/en/translation.json";
-import ru from "../public/locales/ru/translation.json";
-
-// create resources object
-const resources = {
-  en: { translation: en },
-  ru: { translation: ru },
-} as  const;
-
+const savedLang = localStorage.getItem("lang") || "en"
 // initialization
 i18next
+  .use(HTTPBackend)
   .use(initReactI18next)
   .init({
-    resources,
-    lng: "en",
+    lng: savedLang,
     fallbackLng: "en",
+    ns: ["__root", "todos", "about"],
+    defaultNS: "todos",
+    debug: false,
+    backend: {
+      loadPath: "/locales/{{lng}}/{{ns}}.json",
+    },
+    interpolation: {
+      escapeValue: false
+    },
+    react: {
+      useSuspense: true
+    }
   });
-
-export type DefaultResources = typeof resources;
-declare module "i18next" {
-  interface CustomTypeOptions {
-    resources: DefaultResources["en"];
-  }
-}
 
 export default i18next;

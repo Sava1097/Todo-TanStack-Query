@@ -1,0 +1,4 @@
+{ 
+  "about_us" : "About this app", 
+  "about_des":"This is a simple Todo List project built with React, TanStack Query,TanStack Router, Tailwind, and ShadCN UI."
+}
