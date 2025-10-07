@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem,DropdownMenuTrigger,} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Globe } from "lucide-react";
+import clsx from "clsx";
 
 const languages = [
   { code: "en", label: "English", flag: "EN" },
@@ -35,9 +36,10 @@ export function LanguageSwitcher() {
           <DropdownMenuItem
             key={lng.code}
             onClick={() => handleChange(lng.code)}
-            className={`flex items-center justify-between hover:cursor-pointer ${
-              currentLang === lng.code ? "font-semibold bg-muted" : ""
-            }`}
+            className={clsx(
+              "flex items-center justify-between hover:cursor-pointer",
+              currentLang === lng.code && "font-semibold bg-muted"
+            )}
           >
             <span>{lng.flag}</span>
             <span>{lng.label}</span>
