@@ -3,6 +3,7 @@ import { createRootRoute } from "@tanstack/react-router";
 import { Toaster  } from "@/components/ui/sonner";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import "../i18n"
 import { t } from "i18next";
 
@@ -10,12 +11,14 @@ function RootLayout() {
   const { t } = useTranslation("__root")
   return (
     <div className="min-h-screen flex flex-col relative">
-      <nav className="flex justify-center items-center gap-6 p-4 md:text-2xl bg-gray-100 shadow">
+      <nav className="flex justify-center items-center gap-6 p-4 md:text-2xl bg-gray-200 dark:bg-background text-foreground">
+        <ThemeToggle/>
         <Link to="/" className="[&.active]:font-bold">{t("todos")}</Link>
         <Link to="/about" className="[&.active]:font-bold">{t("about")}</Link>
         <LanguageSwitcher/>
       </nav>
-      <main className="flex-1 p-4">
+      <hr/>
+      <main className="flex-1 p-4 bg-background">
         <Outlet />
         <Toaster/>
       </main>

@@ -14,7 +14,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function Todos() {
+export const Todos = () => {
   const { t } = useTranslation("todos");
 
   const { data: tasks, isLoading, isError } = useAllTasks();
@@ -47,16 +47,16 @@ export function Todos() {
   if (isError)
     return (
       <Alert className="flex flex-col justify-center h-screen items-center text-2xl" variant="destructive">
-        <AlertTitle>{t("network_error")}...</AlertTitle>
-        <AlertDescription>{t("failed_to_load_todos")}</AlertDescription>
+        <AlertTitle>{t("network_error")}</AlertTitle>
+        <AlertDescription>{t("failed_to_load_todos")}...</AlertDescription>
       </Alert>
     );
 
   return (
-    <div className="md:min-h-1 bg-gray-50 flex md:items-center lg:items-start justify-center p-4">
-      <Card className="w-full max-w-lg shadow-lg rounded-2xl">
+    <div className="md:min-h-1 bg-background flex md:items-center lg:items-start justify-center p-4">
+      <Card className="w-full max-w-lg rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.25)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.6)] transition-shadow">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center text-gray-800">
+          <CardTitle className="text-2xl font-bold text-center text-gray-800 dark:text-foreground">
             {t("todo_list")} 
           </CardTitle>
         </CardHeader>
@@ -82,7 +82,7 @@ export function Todos() {
             </Button>
           </form>
 
-          {addMutation.isPending && (
+          {addMutation.isPending && ( 
             <div className="flex flex-col justify-center items-center gap-2">
               <p className="text-green-500">{t('adding_todo')}...</p>
               <Loader2 className="animate-spin text-green-600 w-4 h-4" />
@@ -90,9 +90,7 @@ export function Todos() {
           )}
 
           {removeMutation.isError && (
-            <p className="text-red-600 text-center">
-              {t("failed_to_delete_task")}
-            </p>
+            toast.error(t("failed_to_delete_task"))
           )}
 
           <ul className="p-2">
@@ -104,7 +102,7 @@ export function Todos() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.5 }}
-                  className="flex justify-between items-center rounded-lg lg:text-3xl bg-white p-2 lg:p-4 mb-1.5 shadow-sm hover:shadow-md transition"
+                  className="flex justify-between items-center rounded-lg lg:text-3xl bg-background p-2 lg:p-4 mb-1.5 shadow-sm hover:shadow-md transition"
                 >
                   <label className="flex gap-3 justify-center items-center lg:gap-6">
                     <Checkbox
@@ -120,7 +118,7 @@ export function Todos() {
                       className={
                         todo.completed
                           ? "line-through text-gray-400"
-                          : "text-gray-700"
+                          : "text-foreground"
                       }
                     >
                       {todo.title}
@@ -141,11 +139,11 @@ export function Todos() {
           </ul>
 
           {!tasks?.length && (
-             <div className="text-xl lg:text-3xl text-center">{t("empty")}</div>
+             <div className="text-xl lg:text-3xl text-center dark:text-foreground">{t("empty")}</div>
           )}
 
         </CardContent>
-        <CardFooter className="flex justify-center items-center text-gray-600 md:text-xl py-1">
+        <CardFooter className="flex justify-center items-center dark:text-foreground md:text-xl py-1">
           {!!tasks?.length && (
             <p>
               {t("tasks_left", { count: tasks.filter((task) => !task.completed).length })}! 

@@ -6,7 +6,8 @@ import clsx from "clsx";
 
 const languages = [
   { code: "en", label: "English", flag: "EN" },
-  { code: "ru", label: "Русский", flag: "RU" },
+  { code: "ru",label: "Русский", flag: "RU" },
+  { code: "pl", label: "Polish", flag: "PL" },
 ];
 
 export function LanguageSwitcher() {
@@ -23,15 +24,15 @@ export function LanguageSwitcher() {
       <DropdownMenuTrigger className="absolute top-1 right-2 md:top-2 md:right-3" asChild>
         <Button 
           variant="outline"
-          size="sm"
-          className="flex items-center gap-2 hover:cursor-pointer"
+          size="default"
+          className="flex items-center justify-center gap-2 hover:cursor-pointer"
         >
           <Globe className="w-3 h-3" />
           {languages.find((lng) => lng.code === currentLang)?.flag}
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="mr-1"  align="start">
+      <DropdownMenuContent className="mr-1" align="start">
         {languages.map((lng) => (
           <DropdownMenuItem
             key={lng.code}
