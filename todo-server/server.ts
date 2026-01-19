@@ -1,6 +1,6 @@
-// server.ts
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import type { Request, Response } from "express"; 
+import cors from "cors";
 
 interface Task {
   id: number;
@@ -9,31 +9,29 @@ interface Task {
 }
 
 const app = express();
-const PORT =process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
-// middlewares
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
-
-app.get("/", (_req: any, res: any) => {
-  res.send("✅ Todo API working! Use /tasks");
-});
-
-// in-memory tasks
+// In-memory database
 let tasks: Task[] = [];
 let currentId = 1;
 
-// ✅ Get all tasks
-app.get("/tasks", (req: any, res: any) => {
+// Routes
+app.get("/", (_req: Request, res: Response) => {
+  res.send("✅ Todo API working! Use /tasks");
+});
+
+app.get("/tasks", (_req: Request, res: Response) => {
   res.json(tasks);
 });
 
-// ✅ Add task
-app.post("/tasks", (req: any, res: any) => {
+app.post("/tasks", (req: Request, res: Response) => {
   const { title } = req.body;
   if (!title) {
-    return res.status(500).json({ error: "Title is required" });
+    return res.status(400).json({ error: "Title is required" });
   }
 
   const newTask: Task = {
@@ -46,8 +44,7 @@ app.post("/tasks", (req: any, res: any) => {
   res.status(201).json(newTask);
 });
 
-// ✅ Toggle completed
-app.patch("/tasks/:id", (req: any, res: any) => {
+app.patch("/tasks/:id", (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const task = tasks.find((t) => t.id === id);
 
@@ -59,8 +56,7 @@ app.patch("/tasks/:id", (req: any, res: any) => {
   res.json(task);
 });
 
-// ✅ Delete task
-app.delete("/tasks/:id", (req: any, res: any) => {
+app.delete("/tasks/:id", (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const exists = tasks.some((t) => t.id === id);
 
@@ -72,7 +68,6 @@ app.delete("/tasks/:id", (req: any, res: any) => {
   res.status(204).send();
 });
 
-// ✅ Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
