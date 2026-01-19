@@ -1,0 +1,5 @@
+node_modules/
+todo-server/node_modules/
+todo-client/node_modules/
+dist/
+.env
